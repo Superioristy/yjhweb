@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入 element-ui 的样式，-->
+    <!-- 必须先引入vue，  后使用element-ui -->
+    <!-- 引入element 的组件库-->
+    <!-- <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script> -->
+    <title>hover效果</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <div class="login">
+        <h1>Login</h1>
+        <form action="">
+            <input type="text" placeholder="账号">
+            <input type="password" placeholder="密码">
+            <button id="logins">登录</button>
+        </form>
+        <!-- <el-button  @click="open3">登录</el-button> -->
+        <!-- <i class="el-icon-success"></i>  -->
+    </div>
+
+    <script>
+        let login=document.querySelector('.login')
+        let span 
+        let inTime,outTime
+        var doLogin = {};
+        var zh=document.getElementsByTagName("input")[0];
+        var mm=document.getElementsByTagName("input")[1];
+        var logins=document.getElementById("logins");
+        // window.onkeydown = function (event) {
+        // /* 解决兼容性问题 */
+        // event = event || window.event;
+        //     alert(event.keyCode);
+        // if (event.keyCode == 13) {
+        //   doLogin();
+        // };
+        // };
+        logins.onclick=function()
+        {
+            if(zh.value=="admin"&&mm.value=="123456")
+            {
+                console.log("111");
+                alert("登录成功！");
+                window.open("index.html");
+                // window.open("index.html");
+            // window.location.href = "./quote.html";
+            }
+            if(zh.value==""||mm.value=="")
+            {
+           window.location.href ='https://www.taobao.com/';
+                alert("账号或密码不能为空！");
+            }
+            else if(mm.value!="admin"&&zh.value=="123456")
+            {
+                alert("密码错误！");
+            }
+            else if(zh.value!="admin")
+            alert("账号不存在,请注册账号");
+        };
+
+        login.addEventListener('mouseenter',function(e)
+        {
+            inTime=new Date().getTime()
+            span=document.createElement('span')
+            login.appendChild(span)
+
+            span.style.animation='in .5s ease-out forwards'
+
+            let top =e.clientY-e.target.offsetTop
+            let left=e.clientX-e.target.offsetLeft
+
+            span.style.top=top+'px'
+            span.style.left=left+'px'
+        })
+        login.addEventListener('mouseleave',function(e)
+        {
+            outTime=new Date().getTime()
+            let passTime=outTime-inTime
+
+            if(passTime<500)
+            {
+                setTimeout(mouseleave, 500-passTime)
+            }
+            else
+            {
+                mouseleave()
+            }
+
+            function mouseleave(){
+
+            span.style.animation='out .5s ease-out forwards'
+
+            let top=e.clientY-e.target.offsetTop
+            let left=e.clientX-e.target.offsetLeft
+
+            span.style.top=top+'px'
+            span.style.left=left+'px'
+            }
+        })
+    </script>
+</body>
+</html>
